@@ -3,12 +3,11 @@ import ply.yacc as yacc
 # Get the token map from the lexer.  This is required.
 from lex import tokens
 
-DEBUG = False
+DEBUG = True
 
 # Namespace & built-in functions
-
-global ast
-ast = []
+# dictionary used by let
+values = {}
 name = {}
 
 def cons(l):
@@ -75,7 +74,34 @@ def _print(l):
 name['print'] = _print
 
 def let(l):
+
     print l
+
+    # first case of only adding element to dictionary and returning a = 3 ("(let (variable_name number))")
+    if (len(l) == 1):
+
+        values[l[0][0]] = [l[0][1]]
+        v = values[l[0][0]].pop()
+
+        # need to be in format of key = v
+        for i in values:
+            print i, v
+
+    # second case of adding element to dictionary and performing operation ("(let (variable_name number) item_1 item_2 ... )")
+    else:
+
+        # for l[0]
+        values[l[0][0]] = [l[0][1]].pop()
+        print values
+        print l[1]
+
+
+
+        # for l[1]
+        l[1][2] = values[l[0][0]]
+
+
+
 
 name['let'] = let
 
