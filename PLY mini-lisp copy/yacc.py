@@ -139,9 +139,9 @@ def p_exp_call(p):
 
 def p_quoted_list(p):
     'quoted_list : QUOTE list'
-    #p[0] = p[2]
-    p[0] = [p[1]] + p[2]
-    p[0] = ['Quote'] + [p[2]]
+    p[0] = p[2]
+    #p[0] = [p[1]] + p[2]
+    #p[0] = ['Quote'] + [p[2]]
 
 def p_list(p):
     'list : LPAREN items RPAREN'
@@ -185,10 +185,10 @@ def p_call(p):
     if DEBUG: print "Calling", p[2], "with", p[3]
     #if isinstance(p[3], list) and isinstance(p[3], list) and p[3][0][0] == "'":
         #p[3] = [["quote"] + [p[3][0][1:]]]
-    ast = [p[2]] + [i for i in p[3]]
-    print "ast is: ", ast
-    p[0] = ast
-    #p[0] = lisp_eval(p[2], p[3])
+    #ast = [p[2]] + [i for i in p[3]]
+    #print "ast is: ", ast
+    #p[0] = ast
+    p[0] = lisp_eval(p[2], p[3])
 
 def p_atom_simbol(p):
     'atom : SIMB'
