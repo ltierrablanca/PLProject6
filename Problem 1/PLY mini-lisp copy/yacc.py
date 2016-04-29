@@ -3,7 +3,7 @@ import ply.yacc as yacc
 # Get the token map from the lexer.  This is required.
 from lex import tokens
 
-DEBUG = True
+DEBUG = False
 
 # Namespace & built-in functions
 
@@ -73,6 +73,19 @@ def _print(l):
     print lisp_str(l[0])
 
 name['print'] = _print
+
+def let(l):
+    print l
+
+name['let'] = let
+
+def _if(l):
+    if(l[0]):
+        return l[1]
+    else:
+        return l[2]
+
+name['if'] = _if
 
 #  Evaluation functions
 
