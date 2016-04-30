@@ -63,10 +63,20 @@ def add(l):
 name['+'] = add
 
 def minus(l):
-    '''Unary minus'''
-    return -l[0]
+    'Binary minus'
+    return l[1] - l[0]
 
 name['-'] = minus
+
+def mult(l):
+    return l[1] * l[0]
+
+name['*'] = mult
+
+def div(l):
+    print l
+
+name['/'] = div
 
 def _print(l):
     print lisp_str(l[0])
@@ -75,32 +85,22 @@ name['print'] = _print
 
 def let(l):
 
-    print l
-
+    values[l[0][0]] = [l[0][1]]
     # first case of only adding element to dictionary and returning a = 3 ("(let (variable_name number))")
+
     if (len(l) == 1):
-
-        values[l[0][0]] = [l[0][1]]
-        v = values[l[0][0]].pop()
-
-        # need to be in format of key = v
-        for i in values:
-            print i, v
-
+        return values[l[0][0]].pop()
 
 
     # second case of adding element to dictionary and performing operation ("(let (variable_name number) item_1 item_2 ... )")
     else:
 
-        # for l[0]
-        values[l[0][0]] = [l[0][1]].pop()
-        print values
-        print l[1]
+        print l
+        # see which operation needs to be done
+        call(l[1][0], l)
 
 
 
-        # for l[1]
-        l[1][2] = values[l[0][0]]
 
     values.clear()
 
