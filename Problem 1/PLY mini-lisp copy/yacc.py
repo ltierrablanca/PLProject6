@@ -74,9 +74,9 @@ def mult(l):
 name['*'] = mult
 
 def div(l):
-    print l
+    return l[0]/l[1]
 
-name['/'] = div
+name['div'] = div
 
 def _print(l):
     print lisp_str(l[0])
@@ -94,12 +94,9 @@ def let(l):
 
     # second case of adding element to dictionary and performing operation ("(let (variable_name number) item_1 item_2 ... )")
     else:
-
-        print l
         # see which operation needs to be done
-        call(l[1][0], l)
-
-
+        x = l[1][0]([values[l[0][0]].pop(), l[1][1]])
+        return x
 
 
     values.clear()
