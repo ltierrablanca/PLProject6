@@ -87,6 +87,8 @@ def let(l):
         for i in values:
             print i, v
 
+
+
     # second case of adding element to dictionary and performing operation ("(let (variable_name number) item_1 item_2 ... )")
     else:
 
@@ -100,7 +102,7 @@ def let(l):
         # for l[1]
         l[1][2] = values[l[0][0]]
 
-
+    values.clear()
 
 
 name['let'] = let
